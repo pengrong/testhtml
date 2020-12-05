@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="description" content="login">
+    <title>字体</title>
+    <style type="text/css">
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    请选择种类：<select v-model="type">
+    <option value="xianhua">鲜花</option>
+</select>
+    请输入字母：<input v-model="message">
+    <div id="canvas">
+        <span v-html="images"></span>
+    </div>
+    {{ imagesstr }}
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            type: 'xianhua',
+            message: 'DouBan'
+        },
+        computed: {
+            images: function () {
+                var imageStr = "";
+                var words = this.message.split('');
+                for (var i = 0; i < words.length; i++) {
+                    var char = words[i].charCodeAt();
+                    imageStr += '<img src="images/' + this.type + '/' + char + '.png">';
+                }
+                return imageStr;
+            },
+            imagesstr: function () {
+                var imageStr = "";
+                var words = this.message.split('');
+                for (var i = 0; i < words.length; i++) {
+                    var char = words[i].charCodeAt();
+                    imageStr += words[i] + ":" + char + " ";
+                }
+                return imageStr;
+            }
+        }
+    })
+</script>
+</body>
+</html>
